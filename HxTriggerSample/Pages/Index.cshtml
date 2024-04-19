@@ -1,0 +1,23 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<!-- see HtmxEndpoints.CurrentCount -->
+<!-- hx-get is triggered by the server using the 'latest-count' event -->
+<div class="py-4"
+     hx-get="/current-count"
+     hx-trigger="@HtmxEndpoints.LatestCount from:body" hx-swap="innerHTML">
+    <!-- We show the latest count on the initial page load -->
+    Current Count: @HtmxEndpoints.Count (waiting on click...)
+</div>
+
+<!-- See HtmxEndpoints.IncreaseCount -->
+<!-- there is no return HTML, so hx-swap set to 'none' -->
+<button
+    hx-post="/increase-count"
+    hx-swap="none"
+    class="btn btn-primary">
+    Update Count
+</button>
